@@ -7,14 +7,24 @@ import {
   SearchIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/outline";
+import { signIn, signOut, useSession } from "next-auth/client";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { selectTotalQty } from "../slices/basketSlice";
 
 function Header() {
+  const [session] = useSession();
+  const router = useRouter();
+
+  const itemsQty = useSelector(selectTotalQty);
+
   return (
     <header>
       {/* top nav */}
       <div className="bg-amazon_blue w-full flex items-center p-2 space-x-4 pr-4">
-        <div className="flex items-center flex-grow sm:flex-grow-0 mt-2">
+        <div className="flex items-center flex-grow sm:flex-grow-0 mt-2 cursor-pointer">
           <Image
+            onClick={() => router.push("/")}
             src="https://links.papareact.com/f90"
             height={38}
             width={140}
@@ -31,17 +41,23 @@ function Header() {
         </div>
         {/* right side */}
         <div className="flex items-center space-x-6 text-white text-sm md:text-xs whitespace-none">
-          <div>
-            <p>Hello, Rahul Mondal</p>
+          <div
+            onClick={!session ? signIn : signOut}
+            className="hover:underline cursor-pointer"
+          >
+            <p>{session ? `Hello, ${session.user.name}` : "Sign In"}</p>
             <p className="font-bold text-sm">Account & Lists</p>
           </div>
-          <div>
+          <div className="hover:underline cursor-pointer">
             <p>Returns</p>
             <p className="font-bold text-sm">& Orders</p>
           </div>
-          <div className="flex items-center relative cursor-pointer">
+          <div
+            onClick={() => router.push("/checkout")}
+            className="flex items-center relative cursor-pointer"
+          >
             <span className="absolute -top-1 right-0 sm:right-4 z-10 bg-yellow-400 text-black p-1 px-2 rounded-full text-xs">
-              0
+              {itemsQty}
             </span>
             <ShoppingCartIcon className="h-11" />
             <p className="mt-4 hidden sm:inline text-sm font-bold">Cart</p>
