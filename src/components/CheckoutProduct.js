@@ -2,7 +2,7 @@ import { StarIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import Currency from "react-currency-formatter";
 import { useDispatch } from "react-redux";
-import { addAnother } from "../slices/basketSlice";
+import { addToBasket, removeFromBasket } from "../slices/basketSlice";
 
 const CheckoutProduct = ({
   id,
@@ -52,12 +52,17 @@ const CheckoutProduct = ({
       {/* right */}
       <div className="flex flex-col my-auto justify-self-end space-y-2">
         <button
-          onClick={() => dispatch(addAnother({ id, price }))}
+          onClick={() => dispatch(addToBasket({ id, price }))}
           className="button"
         >
           Add Another
         </button>
-        <button className="button">Remove Item</button>
+        <button
+          className="button"
+          onClick={() => dispatch(removeFromBasket({ id }))}
+        >
+          Remove Item
+        </button>
       </div>
     </div>
   );

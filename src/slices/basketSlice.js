@@ -48,7 +48,7 @@ export const basketSlice = createSlice({
   },
 });
 
-export const { addToBasket, removeFromBasket, clearBasket, addAnother } =
+export const { addToBasket, removeFromBasket, clearBasket } =
   basketSlice.actions;
 
 // Selectors - This is how we pull information from the Global store slice
