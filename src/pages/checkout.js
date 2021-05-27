@@ -67,17 +67,23 @@ const Checkout = () => {
         </div>
 
         {/* right */}
-        <div className="text-center w-full md:w-80 mx-auto sm:mt-8 sm:ml-20 p-5 mr-10 flex flex-col items-center space-y-7">
-          <div className="flex">
-            <p className="pr-4">Total Price : </p>
+        <div className="text-center w-full md:w-1/5 mx-auto sm:mt-8 sm:ml-20 p-5 mr-10">
+          <p className="block w-2xl">
+            <span className="mr-2 inline-flex font-semibold">
+              Total Price :
+            </span>
             {items.length ? (
-              <Currency quantity={totalPrice * 70} currency="INR" />
+              <span className="inline-flex items-center">
+                <Currency quantity={totalPrice * 70} currency="INR" />
+              </span>
             ) : (
-              0.0
+              <span>
+                <Currency quantity="0.00" currency="INR" />
+              </span>
             )}
-          </div>
+          </p>
           <button
-            className={`button  ${
+            className={`button block mx-auto  ${
               (!session || !items.length) && "gray cursor-not-allowed"
             } mt-4 `}
             disabled={!session || !items.length ? true : false}

@@ -59,7 +59,7 @@ const CheckoutProduct = ({
         </button>
         <button
           className="button"
-          onClick={() => dispatch(removeFromBasket({ id }))}
+          onClick={() => dispatch(removeFromBasket({ id, price, qty }))}
         >
           Remove Item
         </button>

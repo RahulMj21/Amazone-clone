@@ -20,7 +20,10 @@ export const basketSlice = createSlice({
       if (isInCart) {
         let newItems = state.items.map((item) =>
           item.id === action.payload.id
-            ? { ...item, qty: item.qty + 1 }
+            ? {
+                ...item,
+                qty: item.qty + 1,
+              }
             : { ...item }
         );
         state.items = newItems;
@@ -31,14 +34,18 @@ export const basketSlice = createSlice({
       state.totalPrice = state.totalPrice + action.payload.price;
     },
     removeFromBasket: (state, action) => {
-      const index = state.items.findIndex(
-        (item) => item.id === action.payload.id
+      const isItem = state.items.find((item) =>
+        item.id === action.payload.id ? true : false
       );
-      let newBasket = [state.items];
-      if (index >= 0) {
-        newBasket.splice(index, 1);
+      if (isItem) {
+        const newItems = state.items.filter(
+          (item) => item.id !== action.payload.id
+        );
+        state.items = newItems;
+        state.totalQty = state.totalQty - action.payload.qty;
+        state.totalPrice =
+          state.totalPrice - action.payload.price * action.payload.qty;
       }
-      state.items = newBasket;
     },
     clearBasket: (state) => {
       state.items = [];
