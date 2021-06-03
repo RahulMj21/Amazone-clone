@@ -48,7 +48,14 @@ function Header() {
             <p>{session ? `Hello, ${session.user.name}` : "Sign In"}</p>
             <p className="font-bold text-sm">Account & Lists</p>
           </div>
-          <div className="hover:underline cursor-pointer">
+          <div
+            onClick={
+              session
+                ? () => router.push("/orders")
+                : () => alert("you are not logged in..")
+            }
+            className="hover:underline cursor-pointer"
+          >
             <p>Returns</p>
             <p className="font-bold text-sm">& Orders</p>
           </div>
@@ -74,11 +81,11 @@ function Header() {
         <p className=" cursor-pointer">Mobiles</p>
         <p className=" cursor-pointer">Prime</p>
         <p className=" cursor-pointer">Fashion</p>
-        <p className="hidden sm:inline cursor-pointer">New Releases</p>
-        <p className="hidden sm:inline cursor-pointer">Electronics</p>
-        <p className="hidden sm:inline cursor-pointer">Customer Service</p>
-        <p className="hidden sm:inline cursor-pointer">Today's Deals</p>
-        <p className="hidden sm:inline cursor-pointer">Amazon Pay</p>
+        <p className="hidden md:inline cursor-pointer">New Releases</p>
+        <p className="hidden md:inline cursor-pointer">Electronics</p>
+        <p className="hidden md:inline cursor-pointer">Customer Service</p>
+        <p className="hidden md:inline cursor-pointer">Today's Deals</p>
+        <p className="hidden md:inline cursor-pointer">Amazon Pay</p>
       </div>
     </header>
   );
