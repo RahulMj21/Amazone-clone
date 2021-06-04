@@ -3,11 +3,6 @@ import * as admin from "firebase-admin";
 
 const serviceAccount = require("../../../permissions.json"); // Can't do an import here!
 
-// Merge permissions with environment secret keys
-serviceAccount.client_id = process.env.FIREBASE_ADMIN_CLIENT_ID;
-serviceAccount.private_key_id = process.env.FIREBASE_ADMIN_PRIVATE_KEY_ID;
-serviceAccount.private_key = process.env.FIREBASE_ADMIN_PRIVATE_KEY;
-
 const app = !admin.apps.length
   ? admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
