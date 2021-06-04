@@ -49,11 +49,7 @@ function Header() {
             <p className="font-bold text-sm">Account & Lists</p>
           </div>
           <div
-            onClick={
-              session
-                ? () => router.push("/orders")
-                : () => alert("you are not logged in..")
-            }
+            onClick={() => router.push("/orders")}
             className="hover:underline cursor-pointer"
           >
             <p>Returns</p>
